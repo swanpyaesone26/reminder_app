@@ -28,6 +28,11 @@ class NoteProvider extends ChangeNotifier {
   List<Note> get monthlyDone =>
       _monthlyNotes.where((n) => n.isDone).toList();
 
+  List<Note> get yearlyUndone =>
+      _yearlyNotes.where((n) => !n.isDone).toList();
+  List<Note> get yearlyDone =>
+      _yearlyNotes.where((n) => n.isDone).toList();
+
   List<Note> get yearlyNotes => _yearlyNotes;
   List<Subnote> get subnotes => _subnotes;
 
