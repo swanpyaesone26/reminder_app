@@ -1,35 +1,30 @@
 import 'package:uuid/uuid.dart';
 
-class Note {
+class Subnote {
   final String id;
+  final String noteId; // parent note ID
   final String text;
   final bool isDone;
-  final DateTime? reminder;
-  final String type; // 'daily', 'monthly', 'yearly'
   final DateTime createdAt;
 
-  Note({
+  Subnote({
     String? id,
+    required this.noteId,
     required this.text,
     this.isDone = false,
-    this.reminder,
-    required this.type,
     DateTime? createdAt,
   })  : id = id ?? const Uuid().v4(),
         createdAt = createdAt ?? DateTime.now();
 
-  Note copyWith({
+  Subnote copyWith({
     String? text,
     bool? isDone,
-    DateTime? reminder,
-    String? type,
   }) {
-    return Note(
+    return Subnote(
       id: id,
+      noteId: noteId,
       text: text ?? this.text,
       isDone: isDone ?? this.isDone,
-      reminder: reminder ?? this.reminder,
-      type: type ?? this.type,
       createdAt: createdAt,
     );
   }
@@ -37,23 +32,19 @@ class Note {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'noteId': noteId,
       'text': text,
       'isDone': isDone ? 1 : 0,
-      'reminder': reminder?.toIso8601String(),
-      'type': type,
       'createdAt': createdAt.toIso8601String(),
     };
   }
 
-  factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(
+  factory Subnote.fromMap(Map<String, dynamic> map) {
+    return Subnote(
       id: map['id'],
+      noteId: map['noteId'],
       text: map['text'],
       isDone: map['isDone'] == 1,
-      reminder: map['reminder'] != null
-          ? DateTime.parse(map['reminder'])
-          : null,
-      type: map['type'],
       createdAt: DateTime.parse(map['createdAt']),
     );
   }
