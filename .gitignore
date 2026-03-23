@@ -7,7 +7,12 @@
 .buildlog/
 .history
 
-
+# Gradle files from root (redundant in Flutter)
+/settings.gradle
+/build.gradle
+/gradlew
+/gradlew.bat
+/gradle/
 
 # Flutter repo-specific
 /bin/cache/
