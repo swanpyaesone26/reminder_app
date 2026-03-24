@@ -56,12 +56,15 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                             color: _accent, size: 20),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        'New Monthly Note',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      const Expanded( // Fixed overflow
+                        child: Text(
+                          'New Monthly Reminder',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22, // Slightly reduced font size
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -69,7 +72,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                   const SizedBox(height: 20),
 
                   // Note field
-                  Text(
+                  const Text(
                     'Note',
                     style: TextStyle(
                       color: Colors.white70,
@@ -87,15 +90,15 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                     ),
                     child: TextField(
                       controller: textController,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
                       maxLines: 3,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.all(14),
-                        hintText: 'What\'s the plan this month?',
+                        contentPadding: EdgeInsets.all(14),
+                        hintText: 'What\'s the reminder this month?',
                         hintStyle: TextStyle(
                           color: Colors.white24,
                           fontSize: 18,
@@ -106,7 +109,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                   const SizedBox(height: 16),
 
                   // Reminder date field
-                  Text(
+                  const Text(
                     'Reminder (Optional)',
                     style: TextStyle(
                       color: Colors.white70,
@@ -194,7 +197,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                           color: _accent.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
@@ -205,8 +208,8 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(width: 6),
-                            const Icon(Icons.add_circle_outline,
+                            SizedBox(width: 6),
+                            Icon(Icons.add_circle_outline,
                                 color: _accent, size: 22),
                           ],
                         ),
@@ -263,12 +266,15 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                         color: _accent, size: 22),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    'Monthly Plan',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  const Expanded( // Fixed overflow
+                    child: Text(
+                      'Monthly Reminders',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26, // Slightly reduced font size
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -287,14 +293,14 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                     border: Border.all(
                         color: _accent.withValues(alpha: 0.25), width: 1),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.add_circle_outline,
+                      Icon(Icons.add_circle_outline,
                           color: _accent, size: 22),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
-                        'Add Note',
+                        'Add Reminder',
                         style: TextStyle(
                           color: _accent,
                           fontSize: 20,
@@ -310,7 +316,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
               // Notes list
               Expanded(
                 child: provider.isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                             color: _accent, strokeWidth: 2))
                     : ListView(
@@ -333,16 +339,15 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                             ),
                           if (provider.monthlyUndone.isEmpty &&
                               provider.monthlyDone.isEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 60),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 60),
                               child: Center(
                                 child: Column(
                                   children: [
                                     Icon(Icons.check_circle_outline,
-                                        color: Colors.white.withValues(
-                                            alpha: 0.1),
+                                        color: Colors.white12,
                                         size: 48),
-                                    const SizedBox(height: 12),
+                                    SizedBox(height: 12),
                                     Text(
                                       'No notes yet',
                                       style: TextStyle(

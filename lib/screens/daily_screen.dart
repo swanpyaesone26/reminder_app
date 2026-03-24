@@ -57,7 +57,7 @@ class _DailyScreenState extends State<DailyScreen> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'New Daily Note',
+                        'New Daily Reminder',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -95,7 +95,7 @@ class _DailyScreenState extends State<DailyScreen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.all(14),
-                        hintText: 'What do you need to do?',
+                        hintText: 'What\'s the reminder?',
                         hintStyle: TextStyle(
                           color: Colors.white24,
                           fontSize: 18,
@@ -276,7 +276,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Daily Plan',
+                    'Daily Reminders',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -306,7 +306,7 @@ class _DailyScreenState extends State<DailyScreen> {
                           color: _accent, size: 22),
                       const SizedBox(width: 8),
                       Text(
-                        'Add Note',
+                        'Add Reminder',
                         style: TextStyle(
                           color: _accent,
                           fontSize: 20,

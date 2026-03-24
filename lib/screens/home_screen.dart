@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // App title
                   const Text(
-                    'My Plans',
+                    'RemindMe',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 34,

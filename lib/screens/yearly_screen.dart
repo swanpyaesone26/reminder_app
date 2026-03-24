@@ -56,7 +56,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'New Yearly Note',
+                    'New Yearly Reminder',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -94,7 +94,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(14),
-                    hintText: 'Your yearly goal...',
+                    hintText: 'Your yearly reminder...',
                     hintStyle: TextStyle(
                       color: Colors.white24,
                       fontSize: 18,
@@ -131,7 +131,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(14),
-                    hintText: 'Break it down...',
+                    hintText: 'For your memory ...',
                     hintStyle: TextStyle(
                       color: Colors.white24,
                       fontSize: 18,
@@ -360,7 +360,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Yearly Plan',
+                    'Yearly Reminders',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -390,7 +390,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                           color: _accent, size: 22),
                       const SizedBox(width: 8),
                       Text(
-                        'Add Note',
+                        'Add Reminder',
                         style: TextStyle(
                           color: _accent,
                           fontSize: 20,
