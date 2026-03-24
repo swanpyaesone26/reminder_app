@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/note_model.dart';
 import '../providers/note_provider.dart';
@@ -59,7 +58,7 @@ class _DailyScreenState extends State<DailyScreen> {
                       const SizedBox(width: 10),
                       Text(
                         'New Daily Note',
-                        style: GoogleFonts.caveat(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -72,7 +71,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   // Note field
                   Text(
                     'Note',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white70,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -88,7 +87,7 @@ class _DailyScreenState extends State<DailyScreen> {
                     ),
                     child: TextField(
                       controller: textController,
-                      style: GoogleFonts.caveat(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
@@ -97,7 +96,7 @@ class _DailyScreenState extends State<DailyScreen> {
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.all(14),
                         hintText: 'What do you need to do?',
-                        hintStyle: GoogleFonts.caveat(
+                        hintStyle: TextStyle(
                           color: Colors.white24,
                           fontSize: 18,
                         ),
@@ -109,7 +108,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   // Reminder field
                   Text(
                     'Reminder (Optional)',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white70,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -159,7 +158,7 @@ class _DailyScreenState extends State<DailyScreen> {
                             selectedTime != null
                                 ? '${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}'
                                 : 'Set time',
-                            style: GoogleFonts.caveat(
+                            style: TextStyle(
                               color: selectedTime != null
                                   ? Colors.white
                                   : Colors.white38,
@@ -212,7 +211,7 @@ class _DailyScreenState extends State<DailyScreen> {
                           children: [
                             Text(
                               'Add',
-                              style: GoogleFonts.caveat(
+                              style: TextStyle(
                                 color: _accent,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -278,7 +277,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   const SizedBox(width: 10),
                   Text(
                     'Daily Plan',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -308,7 +307,7 @@ class _DailyScreenState extends State<DailyScreen> {
                       const SizedBox(width: 8),
                       Text(
                         'Add Note',
-                        style: GoogleFonts.caveat(
+                        style: TextStyle(
                           color: _accent,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -358,7 +357,7 @@ class _DailyScreenState extends State<DailyScreen> {
                                     const SizedBox(height: 12),
                                     Text(
                                       'No notes yet',
-                                      style: GoogleFonts.caveat(
+                                      style: TextStyle(
                                         color: Colors.white30,
                                         fontSize: 22,
                                       ),
@@ -424,7 +423,7 @@ class _SectionBox extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 title,
-                style: GoogleFonts.caveat(
+                style: TextStyle(
                   color: isUndone ? _accent : Colors.white54,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -441,7 +440,7 @@ class _SectionBox extends StatelessWidget {
                 ),
                 child: Text(
                   '${notes.length}',
-                  style: GoogleFonts.caveat(
+                  style: TextStyle(
                     color: isUndone ? _accent : Colors.white54,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -500,7 +499,7 @@ class _NoteRow extends StatelessWidget {
           Expanded(
             child: Text(
               note.text,
-              style: GoogleFonts.caveat(
+              style: TextStyle(
                 color: note.isDone ? Colors.white38 : Colors.white,
                 fontSize: 18,
                 decoration: note.isDone

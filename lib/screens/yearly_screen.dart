@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/note_model.dart';
 import '../models/subnote_model.dart';
@@ -58,7 +57,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   const SizedBox(width: 10),
                   Text(
                     'New Yearly Note',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -71,7 +70,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
               // Note field
               Text(
                 'Note',
-                style: GoogleFonts.caveat(
+                style: TextStyle(
                   color: Colors.white70,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -87,7 +86,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                 ),
                 child: TextField(
                   controller: noteController,
-                  style: GoogleFonts.caveat(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                   ),
@@ -96,7 +95,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(14),
                     hintText: 'Your yearly goal...',
-                    hintStyle: GoogleFonts.caveat(
+                    hintStyle: TextStyle(
                       color: Colors.white24,
                       fontSize: 18,
                     ),
@@ -108,7 +107,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
               // Subnote field (optional)
               Text(
                 'Sub-Note (Optional)',
-                style: GoogleFonts.caveat(
+                style: TextStyle(
                   color: Colors.white70,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -124,7 +123,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                 ),
                 child: TextField(
                   controller: subnoteController,
-                  style: GoogleFonts.caveat(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                   ),
@@ -133,7 +132,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(14),
                     hintText: 'Break it down...',
-                    hintStyle: GoogleFonts.caveat(
+                    hintStyle: TextStyle(
                       color: Colors.white24,
                       fontSize: 18,
                     ),
@@ -178,7 +177,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                       children: [
                         Text(
                           'Add',
-                          style: GoogleFonts.caveat(
+                          style: TextStyle(
                             color: _accent,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -245,7 +244,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                       Expanded(
                         child: Text(
                           note.text,
-                          style: GoogleFonts.caveat(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -264,7 +263,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   // Subnote
                   Text(
                     'Sub-Note',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white54,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -274,14 +273,14 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   subnotes.isEmpty
                       ? Text(
                           'No sub-note added',
-                          style: GoogleFonts.caveat(
+                          style: TextStyle(
                             color: Colors.white24,
                             fontSize: 16,
                           ),
                         )
                       : Text(
                           subnotes.first.text,
-                          style: GoogleFonts.caveat(
+                          style: TextStyle(
                             color: Colors.white70,
                             fontSize: 18,
                           ),
@@ -302,7 +301,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                         ),
                         child: Text(
                           'Close',
-                          style: GoogleFonts.caveat(
+                          style: TextStyle(
                             color: Colors.white54,
                             fontSize: 18,
                           ),
@@ -362,7 +361,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   const SizedBox(width: 10),
                   Text(
                     'Yearly Plan',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -392,7 +391,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                       const SizedBox(width: 8),
                       Text(
                         'Add Note',
-                        style: GoogleFonts.caveat(
+                        style: TextStyle(
                           color: _accent,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -444,7 +443,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                                     const SizedBox(height: 12),
                                     Text(
                                       'No notes yet',
-                                      style: GoogleFonts.caveat(
+                                      style: TextStyle(
                                         color: Colors.white30,
                                         fontSize: 22,
                                       ),
@@ -512,7 +511,7 @@ class _SectionBox extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 title,
-                style: GoogleFonts.caveat(
+                style: TextStyle(
                   color: isUndone ? _accent : Colors.white54,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -529,7 +528,7 @@ class _SectionBox extends StatelessWidget {
                 ),
                 child: Text(
                   '${notes.length}',
-                  style: GoogleFonts.caveat(
+                  style: TextStyle(
                     color: isUndone ? _accent : Colors.white54,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -599,7 +598,7 @@ class _NoteRow extends StatelessWidget {
               onTap: onTap,
               child: Text(
                 note.text,
-                style: GoogleFonts.caveat(
+                style: TextStyle(
                   color: note.isDone ? Colors.white38 : Colors.white,
                   fontSize: 18,
                   decoration: note.isDone

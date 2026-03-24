@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/note_model.dart';
 import '../providers/note_provider.dart';
@@ -49,9 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // App title
-                  Text(
+                  const Text(
                     'My Plans',
-                    style: GoogleFonts.caveat(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 34,
                       fontWeight: FontWeight.bold,
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 6),
                   Text(
                     _getGreeting(),
-                    style: GoogleFonts.caveat(
+                    style: const TextStyle(
                       color: Colors.white54,
                       fontSize: 20,
                     ),
@@ -169,21 +168,24 @@ class _NavCard extends StatelessWidget {
                   ),
                   child: Icon(
                     icon,
-                    size: 22,
+                    size: 20, // Reduced icon size slightly
                     color: accentColor,
                   ),
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  label,
-                  style: GoogleFonts.caveat(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                const SizedBox(width: 8),
+                Expanded( // Added Expanded here to prevent overflow
+                  child: Text(
+                    label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18, // Reduced font size slightly for tight layouts
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis, // Add ellipsis if text is too long
                   ),
                 ),
-                const Spacer(),
-                if (undoneNotes.isNotEmpty)
+                if (undoneNotes.isNotEmpty) ...[
+                  const SizedBox(width: 4),
                   Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -193,13 +195,14 @@ class _NavCard extends StatelessWidget {
                     ),
                     child: Text(
                       '${undoneNotes.length}',
-                      style: GoogleFonts.caveat(
+                      style: TextStyle(
                         color: accentColor,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                ],
               ],
             ),
             const SizedBox(height: 14),
@@ -222,9 +225,9 @@ class _NavCard extends StatelessWidget {
                             size: 32,
                           ),
                           const SizedBox(height: 6),
-                          Text(
+                          const Text(
                             'All done!',
-                            style: GoogleFonts.caveat(
+                            style: TextStyle(
                               color: Colors.white38,
                               fontSize: 18,
                               fontStyle: FontStyle.italic,
@@ -266,7 +269,7 @@ class _NavCard extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   undoneNotes[index].text,
-                                  style: GoogleFonts.caveat(
+                                  style: const TextStyle(
                                     color: Colors.white70,
                                     fontSize: 17,
                                   ),
