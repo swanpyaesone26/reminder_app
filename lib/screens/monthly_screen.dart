@@ -16,8 +16,9 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<NoteProvider>().loadNotes('monthly'));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NoteProvider>().loadNotes('monthly');
+    });
   }
 
   // ─────────────────────────────────────

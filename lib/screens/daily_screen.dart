@@ -16,8 +16,9 @@ class _DailyScreenState extends State<DailyScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<NoteProvider>().loadNotes('daily'));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NoteProvider>().loadNotes('daily');
+    });
   }
 
   // ─────────────────────────────────────

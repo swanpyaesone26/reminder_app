@@ -24,12 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _navigate(BuildContext context, Widget screen) async {
+    final provider = context.read<NoteProvider>();
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => screen),
     );
     if (!mounted) return;
-    final provider = context.read<NoteProvider>();
     provider.loadNotes('daily');
     provider.loadNotes('monthly');
     provider.loadNotes('yearly');
@@ -252,7 +252,7 @@ class _NavCard extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         itemCount: undoneNotes.length,
-                        separatorBuilder: (_, __) =>
+                        separatorBuilder: (_, _) =>
                             const SizedBox(height: 6),
                         itemBuilder: (context, index) {
                           return Row(

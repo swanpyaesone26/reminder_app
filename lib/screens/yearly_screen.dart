@@ -17,8 +17,9 @@ class _YearlyScreenState extends State<YearlyScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<NoteProvider>().loadNotes('yearly'));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NoteProvider>().loadNotes('yearly');
+    });
   }
 
   // ─────────────────────────────────────
@@ -153,17 +154,19 @@ class _YearlyScreenState extends State<YearlyScreen> {
                       type: 'yearly',
                     );
 
-                    await context.read<NoteProvider>().addNote(note);
+                    final nav = Navigator.of(context);
+                    final prov = context.read<NoteProvider>();
+                    await prov.addNote(note);
 
                     if (subnoteController.text.trim().isNotEmpty) {
                       final subnote = Subnote(
                         noteId: note.id,
                         text: subnoteController.text.trim(),
                       );
-                      await context.read<NoteProvider>().addSubnote(subnote);
+                      await prov.addSubnote(subnote);
                     }
 
-                    if (context.mounted) Navigator.pop(context);
+                    nav.pop();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -205,7 +208,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
     final provider = context.read<NoteProvider>();
     await provider.loadSubnotes(note.id);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
 
     showDialog(
       context: context,
