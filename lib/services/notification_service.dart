@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
@@ -15,9 +16,10 @@ class NotificationService {
   // ─────────────────────────────────────
   Future<void> init() async {
     tz.initializeTimeZones();
-    
-    // Set local timezone (Bangkok since you're in Bangkok)
-    tz.setLocalLocation(tz.getLocation('Asia/Bangkok'));
+
+    // Auto detect device timezone
+    final localTimezone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(localTimezone.identifier));
 
     const androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -30,7 +32,8 @@ class NotificationService {
     await _plugin.initialize(initSettings);
 
     // Request permission (Android 13+)
-    final androidImpl = _plugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+    final androidImpl = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
     await androidImpl?.requestNotificationsPermission();
   }
 

@@ -5,6 +5,8 @@ import '../models/note_model.dart';
 import '../models/subnote_model.dart';
 import '../providers/note_provider.dart';
 
+const _accent = Color(0xFFFF6B6B);
+
 class YearlyScreen extends StatefulWidget {
   const YearlyScreen({super.key});
 
@@ -32,29 +34,56 @@ class _YearlyScreenState extends State<YearlyScreen> {
       builder: (context) => Dialog(
         backgroundColor: const Color(0xFF2D2D2D),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Colors.white, width: 1.5),
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: _accent.withValues(alpha: 0.3), width: 1),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Dialog title
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: _accent.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.calendar_today,
+                        color: _accent, size: 20),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'New Yearly Note',
+                    style: GoogleFonts.caveat(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
               // Note field
               Text(
                 'Note',
                 style: GoogleFonts.caveat(
-                  color: Colors.white,
-                  fontSize: 20,
+                  color: Colors.white70,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 1.5),
-                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white.withValues(alpha: 0.05),
+                  border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.12), width: 1),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
                   controller: noteController,
@@ -63,9 +92,14 @@ class _YearlyScreenState extends State<YearlyScreen> {
                     fontSize: 18,
                   ),
                   maxLines: 2,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(14),
+                    hintText: 'Your yearly goal...',
+                    hintStyle: GoogleFonts.caveat(
+                      color: Colors.white24,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -75,16 +109,18 @@ class _YearlyScreenState extends State<YearlyScreen> {
               Text(
                 'Sub-Note (Optional)',
                 style: GoogleFonts.caveat(
-                  color: Colors.white,
-                  fontSize: 20,
+                  color: Colors.white70,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 1.5),
-                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white.withValues(alpha: 0.05),
+                  border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.12), width: 1),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
                   controller: subnoteController,
@@ -93,13 +129,18 @@ class _YearlyScreenState extends State<YearlyScreen> {
                     fontSize: 18,
                   ),
                   maxLines: 2,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(14),
+                    hintText: 'Break it down...',
+                    hintStyle: GoogleFonts.caveat(
+                      color: Colors.white24,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               // Add button
               Align(
@@ -115,7 +156,6 @@ class _YearlyScreenState extends State<YearlyScreen> {
 
                     await context.read<NoteProvider>().addNote(note);
 
-                    // Add subnote if filled
                     if (subnoteController.text.trim().isNotEmpty) {
                       final subnote = Subnote(
                         noteId: note.id,
@@ -126,21 +166,29 @@ class _YearlyScreenState extends State<YearlyScreen> {
 
                     if (context.mounted) Navigator.pop(context);
                   },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Add',
-                        style: GoogleFonts.caveat(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: _accent.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Add',
+                          style: GoogleFonts.caveat(
+                            color: _accent,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 6),
-                      const Icon(Icons.add_box_outlined,
-                          color: Colors.white, size: 24),
-                    ],
+                        const SizedBox(width: 6),
+                        const Icon(Icons.add_circle_outline,
+                            color: _accent, size: 22),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -171,11 +219,12 @@ class _YearlyScreenState extends State<YearlyScreen> {
           return Dialog(
             backgroundColor: const Color(0xFF2D2D2D),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: const BorderSide(color: Colors.white, width: 1.5),
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                  color: _accent.withValues(alpha: 0.3), width: 1),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,8 +232,16 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   // Main note
                   Row(
                     children: [
-                      const Icon(Icons.notes, color: Colors.white, size: 20),
-                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: _accent.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(Icons.notes,
+                            color: _accent, size: 20),
+                      ),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           note.text,
@@ -197,13 +254,18 @@ class _YearlyScreenState extends State<YearlyScreen> {
                       ),
                     ],
                   ),
-                  const Divider(color: Colors.white38, height: 24),
+                  const SizedBox(height: 16),
+                  Container(
+                    height: 1,
+                    color: Colors.white.withValues(alpha: 0.06),
+                  ),
+                  const SizedBox(height: 16),
 
                   // Subnote
                   Text(
                     'Sub-Note',
                     style: GoogleFonts.caveat(
-                      color: Colors.white70,
+                      color: Colors.white54,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -211,31 +273,39 @@ class _YearlyScreenState extends State<YearlyScreen> {
                   const SizedBox(height: 8),
                   subnotes.isEmpty
                       ? Text(
-                    'No sub-note added',
-                    style: GoogleFonts.caveat(
-                      color: Colors.white38,
-                      fontSize: 16,
-                    ),
-                  )
+                          'No sub-note added',
+                          style: GoogleFonts.caveat(
+                            color: Colors.white24,
+                            fontSize: 16,
+                          ),
+                        )
                       : Text(
-                    subnotes.first.text,
-                    style: GoogleFonts.caveat(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                          subnotes.first.text,
+                          style: GoogleFonts.caveat(
+                            color: Colors.white70,
+                            fontSize: 18,
+                          ),
+                        ),
+                  const SizedBox(height: 24),
 
                   // Close button
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: Text(
-                        'Close',
-                        style: GoogleFonts.caveat(
-                          color: Colors.white60,
-                          fontSize: 18,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.06),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          'Close',
+                          style: GoogleFonts.caveat(
+                            color: Colors.white54,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -260,7 +330,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
       backgroundColor: const Color(0xFF1A1A1A),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -269,38 +339,67 @@ class _YearlyScreenState extends State<YearlyScreen> {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back,
-                        color: Colors.white, size: 28),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.06),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(Icons.arrow_back_ios_new,
+                          color: Colors.white70, size: 20),
+                    ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 14),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: _accent.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.calendar_today,
+                        color: _accent, size: 22),
+                  ),
+                  const SizedBox(width: 10),
                   Text(
                     'Yearly Plan',
                     style: GoogleFonts.caveat(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
               // Add Note button
               GestureDetector(
                 onTap: _showAddNoteDialog,
-                child: Row(
-                  children: [
-                    const Icon(Icons.add_box_outlined,
-                        color: Colors.white, size: 24),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Add Note',
-                      style: GoogleFonts.caveat(
-                        color: Colors.white,
-                        fontSize: 20,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: _accent.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                        color: _accent.withValues(alpha: 0.25), width: 1),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.add_circle_outline,
+                          color: _accent, size: 22),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Add Note',
+                        style: GoogleFonts.caveat(
+                          color: _accent,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -308,43 +407,54 @@ class _YearlyScreenState extends State<YearlyScreen> {
               // Notes list
               Expanded(
                 child: provider.isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? Center(
+                        child: CircularProgressIndicator(
+                            color: _accent, strokeWidth: 2))
                     : ListView(
-                  children: [
-                    // Undone section
-                    if (provider.yearlyUndone.isNotEmpty) ...[
-                      _SectionBox(
-                        title: 'Undone',
-                        notes: provider.yearlyUndone,
-                        provider: provider,
-                        onNoteTap: _showViewSubnotePopup,
+                        children: [
+                          if (provider.yearlyUndone.isNotEmpty) ...[
+                            _SectionBox(
+                              title: 'Undone',
+                              notes: provider.yearlyUndone,
+                              provider: provider,
+                              onNoteTap: _showViewSubnotePopup,
+                              isUndone: true,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                          if (provider.yearlyDone.isNotEmpty)
+                            _SectionBox(
+                              title: 'Done',
+                              notes: provider.yearlyDone,
+                              provider: provider,
+                              onNoteTap: _showViewSubnotePopup,
+                              isUndone: false,
+                            ),
+                          if (provider.yearlyUndone.isEmpty &&
+                              provider.yearlyDone.isEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 60),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Icon(Icons.check_circle_outline,
+                                        color: Colors.white.withValues(
+                                            alpha: 0.1),
+                                        size: 48),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      'No notes yet',
+                                      style: GoogleFonts.caveat(
+                                        color: Colors.white30,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                      const SizedBox(height: 16),
-                    ],
-
-                    // Done section
-                    if (provider.yearlyDone.isNotEmpty)
-                      _SectionBox(
-                        title: 'Done',
-                        notes: provider.yearlyDone,
-                        provider: provider,
-                        onNoteTap: _showViewSubnotePopup,
-                      ),
-
-                    // Empty state
-                    if (provider.yearlyUndone.isEmpty &&
-                        provider.yearlyDone.isEmpty)
-                      Center(
-                        child: Text(
-                          'No notes yet',
-                          style: GoogleFonts.caveat(
-                            color: Colors.white38,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
               ),
             ],
           ),
@@ -362,39 +472,78 @@ class _SectionBox extends StatelessWidget {
   final List<Note> notes;
   final NoteProvider provider;
   final Function(Note) onNoteTap;
+  final bool isUndone;
 
   const _SectionBox({
     required this.title,
     required this.notes,
     required this.provider,
     required this.onNoteTap,
+    required this.isUndone,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white, width: 1.5),
-        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFF2D2D2D),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isUndone
+              ? _accent.withValues(alpha: 0.2)
+              : Colors.white.withValues(alpha: 0.06),
+          width: 1,
+        ),
       ),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: GoogleFonts.caveat(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Container(
+                width: 4,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: isUndone ? _accent : Colors.white24,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: GoogleFonts.caveat(
+                  color: isUndone ? _accent : Colors.white54,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: (isUndone ? _accent : Colors.white24)
+                      .withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  '${notes.length}',
+                  style: GoogleFonts.caveat(
+                    color: isUndone ? _accent : Colors.white54,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           ...notes.map((note) => _NoteRow(
-            note: note,
-            provider: provider,
-            onTap: () => onNoteTap(note),
-          )),
+                note: note,
+                provider: provider,
+                onTap: () => onNoteTap(note),
+              )),
         ],
       ),
     );
@@ -418,7 +567,7 @@ class _NoteRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
           // Checkbox
@@ -428,18 +577,21 @@ class _NoteRow extends StatelessWidget {
               width: 22,
               height: 22,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1.5),
-                borderRadius: BorderRadius.circular(4),
+                border: Border.all(
+                  color: note.isDone ? _accent : Colors.white30,
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.circular(6),
                 color: note.isDone
-                    ? Colors.white.withOpacity(0.3)
+                    ? _accent.withValues(alpha: 0.2)
                     : Colors.transparent,
               ),
               child: note.isDone
-                  ? const Icon(Icons.check, color: Colors.white, size: 16)
+                  ? const Icon(Icons.check, color: _accent, size: 16)
                   : null,
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
 
           // Note text — tap to view subnote
           Expanded(
@@ -448,11 +600,12 @@ class _NoteRow extends StatelessWidget {
               child: Text(
                 note.text,
                 style: GoogleFonts.caveat(
-                  color: Colors.white,
+                  color: note.isDone ? Colors.white38 : Colors.white,
                   fontSize: 18,
                   decoration: note.isDone
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
+                  decorationColor: Colors.white38,
                 ),
               ),
             ),
@@ -461,8 +614,8 @@ class _NoteRow extends StatelessWidget {
           // Delete button
           GestureDetector(
             onTap: () => provider.deleteNote(note),
-            child: const Icon(Icons.delete_outline,
-                color: Colors.white, size: 22),
+            child: Icon(Icons.delete_outline,
+                color: Colors.white.withValues(alpha: 0.2), size: 20),
           ),
         ],
       ),
