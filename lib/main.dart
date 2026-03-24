@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
-import 'providers/note_provider.dart'; // ← add this
+import 'providers/note_provider.dart';
+import 'services/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init();
   runApp(const MyApp());
 }
 

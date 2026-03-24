@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../models/note_model.dart';
 import '../models/subnote_model.dart';
 import '../services/note_service.dart';
+import '../services/notification_service.dart';
 
 class NoteProvider extends ChangeNotifier {
   final NoteService _service = NoteService();
+  final NotificationService _notificationService = NotificationService();
 
   // ─────────────────────────────────────
   // STATE
@@ -69,6 +71,26 @@ class NoteProvider extends ChangeNotifier {
   // Add note
   Future<void> addNote(Note note) async {
     await _service.addNote(note);
+
+    // Schedule notification if reminder is set
+    if (note.reminder != null) {
+      final notifId = note.id.hashCode.abs();
+
+      if (note.type == 'daily') {
+        await _notificationService.scheduleDailyNotification(
+          id: notifId,
+          title: note.text,
+          scheduledTime: note.reminder!,
+        );
+      } else if (note.type == 'monthly') {
+        await _notificationService.scheduleMonthlyNotification(
+          id: notifId,
+          title: note.text,
+          reminderDate: note.reminder!,
+        );
+      }
+    }
+
     await loadNotes(note.type);
   }
 
@@ -82,6 +104,13 @@ class NoteProvider extends ChangeNotifier {
   // Delete note
   Future<void> deleteNote(Note note) async {
     await _service.deleteNote(note.id);
+
+    // Cancel notification if exists
+    if (note.reminder != null) {
+      // Updated for positional argument in NotificationService
+      await _notificationService.cancelNotification(note.id.hashCode.abs());
+    }
+
     await loadNotes(note.type);
   }
 
@@ -91,7 +120,7 @@ class NoteProvider extends ChangeNotifier {
 
   // Load subnotes for a specific note
   Future<void> loadSubnotes(String noteId) async {
-    _subnotes = await _service.getSubnotes(noteId); // Fixed method name
+    _subnotes = await _service.getSubnotes(noteId);
     notifyListeners();
   }
 
