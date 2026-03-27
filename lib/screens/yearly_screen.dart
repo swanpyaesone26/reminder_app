@@ -39,10 +39,11 @@ class _YearlyScreenState extends State<YearlyScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               // Dialog title
               Row(
                 children: [
@@ -56,12 +57,15 @@ class _YearlyScreenState extends State<YearlyScreen> {
                         color: _accent, size: 20),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    'New Yearly Reminder',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      'New Yearly Reminder',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -69,13 +73,14 @@ class _YearlyScreenState extends State<YearlyScreen> {
               const SizedBox(height: 20),
 
               // Note field
-              Text(
+              const Text(
                 'Note',
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Container(
@@ -106,13 +111,14 @@ class _YearlyScreenState extends State<YearlyScreen> {
               const SizedBox(height: 16),
 
               // Subnote field (optional)
-              Text(
+              const Text(
                 'Sub-Note (Optional)',
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Container(
@@ -178,13 +184,14 @@ class _YearlyScreenState extends State<YearlyScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        const Text(
                           'Add',
                           style: TextStyle(
                             color: _accent,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(width: 6),
                         const Icon(Icons.add_circle_outline,
@@ -195,6 +202,7 @@ class _YearlyScreenState extends State<YearlyScreen> {
                 ),
               ),
             ],
+          ),
           ),
         ),
       ),
@@ -362,12 +370,15 @@ class _YearlyScreenState extends State<YearlyScreen> {
                         color: _accent, size: 22),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    'Yearly Reminders',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      'Yearly Reminders',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

@@ -40,10 +40,11 @@ class _DailyScreenState extends State<DailyScreen> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   // Dialog title
                   Row(
                     children: [
@@ -57,12 +58,15 @@ class _DailyScreenState extends State<DailyScreen> {
                             color: _accent, size: 20),
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        'New Daily Reminder',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      const Expanded( // Fixed overflow
+                        child: Text(
+                          'New Daily Reminder',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22, // Slightly reduced
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -70,7 +74,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   const SizedBox(height: 20),
 
                   // Note field
-                  Text(
+                  const Text(
                     'Note',
                     style: TextStyle(
                       color: Colors.white70,
@@ -88,14 +92,14 @@ class _DailyScreenState extends State<DailyScreen> {
                     ),
                     child: TextField(
                       controller: textController,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
                       maxLines: 3,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.all(14),
+                        contentPadding: EdgeInsets.all(14),
                         hintText: 'What\'s the reminder?',
                         hintStyle: TextStyle(
                           color: Colors.white24,
@@ -107,7 +111,7 @@ class _DailyScreenState extends State<DailyScreen> {
                   const SizedBox(height: 16),
 
                   // Reminder field
-                  Text(
+                  const Text(
                     'Reminder (Optional)',
                     style: TextStyle(
                       color: Colors.white70,
@@ -207,7 +211,7 @@ class _DailyScreenState extends State<DailyScreen> {
                           color: _accent.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
@@ -218,8 +222,8 @@ class _DailyScreenState extends State<DailyScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(width: 6),
-                            const Icon(Icons.add_circle_outline,
+                            SizedBox(width: 6),
+                            Icon(Icons.add_circle_outline,
                                 color: _accent, size: 22),
                           ],
                         ),
@@ -227,6 +231,7 @@ class _DailyScreenState extends State<DailyScreen> {
                     ),
                   ),
                 ],
+              ),
               ),
             ),
           );
@@ -276,12 +281,15 @@ class _DailyScreenState extends State<DailyScreen> {
                         color: _accent, size: 22),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    'Daily Reminders',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  const Expanded( // Fixed overflow
+                    child: Text(
+                      'Daily Reminders',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26, // Slightly reduced
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -300,12 +308,12 @@ class _DailyScreenState extends State<DailyScreen> {
                     border: Border.all(
                         color: _accent.withValues(alpha: 0.25), width: 1),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.add_circle_outline,
+                      Icon(Icons.add_circle_outline,
                           color: _accent, size: 22),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Add Reminder',
                         style: TextStyle(
@@ -323,7 +331,7 @@ class _DailyScreenState extends State<DailyScreen> {
               // Notes list
               Expanded(
                 child: provider.isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                             color: _accent, strokeWidth: 2))
                     : ListView(
@@ -346,16 +354,15 @@ class _DailyScreenState extends State<DailyScreen> {
                             ),
                           if (provider.dailyUndone.isEmpty &&
                               provider.dailyDone.isEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 60),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 60),
                               child: Center(
                                 child: Column(
                                   children: [
                                     Icon(Icons.check_circle_outline,
-                                        color: Colors.white.withValues(
-                                            alpha: 0.1),
+                                        color: Colors.white12,
                                         size: 48),
-                                    const SizedBox(height: 12),
+                                    SizedBox(height: 12),
                                     Text(
                                       'No notes yet',
                                       style: TextStyle(

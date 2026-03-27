@@ -65,6 +65,11 @@ class NotificationService {
       tz.local,
     );
 
+    // Skip if date is in the past
+    if (tzScheduled.isBefore(tz.TZDateTime.now(tz.local))) {
+      return;
+    }
+
     // Fixed for version 17.2.2 (5 Positional arguments + named)
     await _plugin.zonedSchedule(
       id,
@@ -98,6 +103,11 @@ class NotificationService {
       oneDayBefore,
       tz.local,
     );
+
+    // Skip if date is in the past
+    if (tzScheduled.isBefore(tz.TZDateTime.now(tz.local))) {
+      return;
+    }
 
     // Fixed for version 17.2.2 (5 Positional arguments + named)
     await _plugin.zonedSchedule(

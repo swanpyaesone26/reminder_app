@@ -50,7 +50,6 @@ class NoteProvider extends ChangeNotifier {
   // ─────────────────────────────────────
   Future<void> loadNotes(String type) async {
     _isLoading = true;
-    notifyListeners();
 
     if (type == 'daily') {
       _dailyNotes = await _service.getNotesByType('daily');

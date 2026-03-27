@@ -40,10 +40,11 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   // Dialog title
                   Row(
                     children: [
@@ -150,7 +151,6 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.calendar_today,
                               color: selectedDate != null
@@ -158,15 +158,18 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                                   : Colors.white38,
                               size: 20),
                           const SizedBox(width: 8),
-                          Text(
-                            selectedDate != null
-                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                                : 'Set date',
-                            style: TextStyle(
-                              color: selectedDate != null
-                                  ? Colors.white
-                                  : Colors.white38,
-                              fontSize: 18,
+                          Expanded(
+                            child: Text(
+                              selectedDate != null
+                                  ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                                  : 'Set date',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: selectedDate != null
+                                    ? Colors.white
+                                    : Colors.white38,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ],
@@ -218,6 +221,7 @@ class _MonthlyScreenState extends State<MonthlyScreen> {
                     ),
                   ),
                 ],
+              ),
               ),
             ),
           );
@@ -415,12 +419,15 @@ class _SectionBox extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  color: isUndone ? _accent : Colors.white54,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: isUndone ? _accent : Colors.white54,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 8),
@@ -496,6 +503,8 @@ class _NoteRow extends StatelessWidget {
               children: [
                 Text(
                   note.text,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: note.isDone ? Colors.white38 : Colors.white,
                     fontSize: 18,
