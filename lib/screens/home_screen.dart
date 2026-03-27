@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             undoneNotes: provider.yearlyUndone,
                             onTap: () =>
                                 _navigate(context, const YearlyScreen()),
-                          ),
+s                           ),
                         ),
                       ],
                     ),
